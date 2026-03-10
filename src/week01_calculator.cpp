@@ -1,14 +1,25 @@
-#include "include/course/week01_calculator.hpp"
+#include "course/week01_calculator.hpp"
 
 #include <stdexcept>
 
 namespace course {
 
 double calculate(double lhs, double rhs, char op) {
-    (void)lhs;
-    (void)rhs;
-    (void)op;
-    throw std::logic_error("Week 01 calculate() not implemented");
+    switch(op){
+        case '+':
+            return lhs + rhs;
+        case '-':
+            return lhs - rhs;
+        case '/':
+            if (rhs == 0){
+                throw std::runtime_error("cannot divide by zero");
+            }
+            return lhs/rhs;
+        case '*':
+            return lhs*rhs;
+        default:
+            throw std::runtime_error("operator is not valid");
+    }
 }
 
 }  // namespace course
