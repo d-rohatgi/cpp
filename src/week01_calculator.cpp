@@ -1,4 +1,4 @@
-#include "course/week01_calculator.hpp"
+#include "include/course/week01_calculator.hpp"
 
 #include <stdexcept>
 
