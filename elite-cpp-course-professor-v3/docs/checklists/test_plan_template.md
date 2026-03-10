@@ -1,0 +1,16 @@
+# Test Plan Template
+
+## Normal cases
+- ...
+
+## Edge cases
+- ...
+
+## Failure cases
+- ...
+
+## Long-run or stress cases
+- ...
+
+## What bug am I most worried about?
+- ...
