@@ -1,17 +1,11 @@
-# Week 06 — Binary Tree Library
+# Week 06 — Pointers, References, and Linked Intuition
 
 ## Objective
-Implement the core system for this week with correct invariants, meaningful tests, and a benchmark baseline.
+Understand stack vs heap and basic pointer manipulation.
 
-## Deliverables
-- implementation
-- public test pass
-- additional self-written tests
-- one benchmark
-- one short design note
-
-## Hidden-test themes
-- edge cases
-- long operation sequences
-- incorrect assumptions about ownership or ordering
-- complexity regressions
+## Main project
+Implement a tiny singly linked list for integers:
+- push_front
+- print
+- contains
+- delete_all

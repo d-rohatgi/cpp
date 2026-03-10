@@ -1,17 +1,10 @@
 # Week 24 — Capstone
 
 ## Objective
-Implement the core system for this week with correct invariants, meaningful tests, and a benchmark baseline.
+Implement the core system for this week with correct invariants, meaningful tests, and one benchmark or performance note.
 
 ## Deliverables
 - implementation
-- public test pass
-- additional self-written tests
-- one benchmark
-- one short design note
-
-## Hidden-test themes
-- edge cases
-- long operation sequences
-- incorrect assumptions about ownership or ordering
-- complexity regressions
+- public tests or self-written tests
+- reflection note
+- baseline measurement where appropriate

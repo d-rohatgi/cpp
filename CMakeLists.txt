@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.20)
-project(cs290_elite_cpp_systems_professor_edition LANGUAGES CXX)
+project(cs290_elite_cpp_redesigned LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -36,29 +36,32 @@ if(ENABLE_BENCHMARKS)
   FetchContent_MakeAvailable(googlebenchmark)
 endif()
 
-add_library(course_core
-  src/graph.cpp
+add_library(course_foundations
+  src/week03_bank_account.cpp
+  src/week05_frequency_counter.cpp
 )
-target_include_directories(course_core PUBLIC include)
+target_include_directories(course_foundations PUBLIC include)
+
+add_executable(week01_calculator src/week01_calculator.cpp)
+add_executable(week02_text_analyzer src/week02_text_analyzer.cpp)
+add_executable(week04_expense_tracker src/week04_expense_tracker.cpp)
+target_link_libraries(week04_expense_tracker PRIVATE course_foundations)
 
 if(ENABLE_TESTS)
   add_executable(public_tests
-    tests/vector_public_test.cpp
-    tests/smart_pointers_public_test.cpp
-    tests/algorithms_public_test.cpp
-    tests/hashmap_public_test.cpp
-    tests/lru_cache_public_test.cpp
-    tests/graph_public_test.cpp
+    tests/week03_bank_account_public_test.cpp
+    tests/week05_frequency_counter_public_test.cpp
+    tests/week07_vector_public_test.cpp
   )
-  target_link_libraries(public_tests PRIVATE course_core GTest::gtest_main)
+  target_link_libraries(public_tests PRIVATE course_foundations GTest::gtest_main)
   include(GoogleTest)
   gtest_discover_tests(public_tests)
 endif()
 
 if(ENABLE_BENCHMARKS)
-  add_executable(vector_bench benchmarks/vector_bench.cpp)
-  target_link_libraries(vector_bench PRIVATE course_core benchmark::benchmark)
+  add_executable(vector_bench benchmarks/week07_vector_bench.cpp)
+  target_link_libraries(vector_bench PRIVATE course_foundations benchmark::benchmark)
 
-  add_executable(hashmap_bench benchmarks/hashmap_bench.cpp)
-  target_link_libraries(hashmap_bench PRIVATE course_core benchmark::benchmark)
+  add_executable(freq_counter_bench benchmarks/week05_frequency_counter_bench.cpp)
+  target_link_libraries(freq_counter_bench PRIVATE course_foundations benchmark::benchmark)
 endif()

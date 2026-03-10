@@ -1,17 +1,16 @@
-# Week 07 — AVL Tree
+# Week 07 — Dynamic Vector
 
 ## Objective
-Implement the core system for this week with correct invariants, meaningful tests, and a benchmark baseline.
+Now that std::vector feels familiar, build a simplified one yourself.
 
-## Deliverables
-- implementation
-- public test pass
-- additional self-written tests
-- one benchmark
-- one short design note
+## Main project
+Implement course::Vector<T> with:
+- push_back
+- pop_back
+- reserve
+- clear
+- copy/move support
+- size / capacity / empty
 
-## Hidden-test themes
-- edge cases
-- long operation sequences
-- incorrect assumptions about ownership or ordering
-- complexity regressions
+## Public tests
+See tests/week07_vector_public_test.cpp.

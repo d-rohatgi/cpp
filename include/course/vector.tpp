@@ -9,32 +9,28 @@ Vector<T>::Vector() : data_(nullptr), size_(0), capacity_(0) {}
 
 template <typename T>
 Vector<T>::~Vector() {
-    // TODO(student): destroy live elements and free raw storage.
+    // TODO(student): destroy elements and free raw storage.
 }
 
 template <typename T>
 Vector<T>::Vector(const Vector& other) : data_(nullptr), size_(0), capacity_(0) {
-    // TODO(student): deep-copy elements.
     (void)other;
     throw std::logic_error("Vector copy constructor not implemented");
 }
 
 template <typename T>
 Vector<T>& Vector<T>::operator=(const Vector& other) {
-    // TODO(student): implement copy assignment.
     (void)other;
     throw std::logic_error("Vector copy assignment not implemented");
 }
 
 template <typename T>
 Vector<T>::Vector(Vector&& other) noexcept : data_(nullptr), size_(0), capacity_(0) {
-    // TODO(student): implement move constructor.
     (void)other;
 }
 
 template <typename T>
 Vector<T>& Vector<T>::operator=(Vector&& other) noexcept {
-    // TODO(student): implement move assignment.
     (void)other;
     return *this;
 }
@@ -64,33 +60,23 @@ void Vector<T>::reserve(std::size_t new_capacity) {
 
 template <typename T>
 void Vector<T>::clear() noexcept {
-    // TODO(student): destroy constructed elements, preserve capacity.
+    // TODO(student): destroy constructed elements but keep capacity.
 }
 
 template <typename T>
-std::size_t Vector<T>::size() const noexcept {
-    return size_;
-}
+std::size_t Vector<T>::size() const noexcept { return size_; }
 
 template <typename T>
-std::size_t Vector<T>::capacity() const noexcept {
-    return capacity_;
-}
+std::size_t Vector<T>::capacity() const noexcept { return capacity_; }
 
 template <typename T>
-bool Vector<T>::empty() const noexcept {
-    return size_ == 0;
-}
+bool Vector<T>::empty() const noexcept { return size_ == 0; }
 
 template <typename T>
-T& Vector<T>::operator[](std::size_t index) noexcept {
-    return data_[index];
-}
+T& Vector<T>::operator[](std::size_t index) noexcept { return data_[index]; }
 
 template <typename T>
-const T& Vector<T>::operator[](std::size_t index) const noexcept {
-    return data_[index];
-}
+const T& Vector<T>::operator[](std::size_t index) const noexcept { return data_[index]; }
 
 template <typename T>
 T& Vector<T>::at(std::size_t index) {
@@ -115,7 +101,7 @@ void Vector<T>::grow() {
 
 template <typename T>
 void Vector<T>::destroy_elements() noexcept {
-    // TODO(student): destroy constructed elements only.
+    // TODO(student): destroy only live objects.
 }
 
 }  // namespace course

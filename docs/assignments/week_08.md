@@ -1,17 +1,10 @@
-# Week 08 — Binary Heap
+# Week 08 — Smart Pointers
 
 ## Objective
-Implement the core system for this week with correct invariants, meaningful tests, and a benchmark baseline.
+Use your new comfort with classes and ownership to implement UniquePtr and SharedPtr.
 
 ## Deliverables
-- implementation
-- public test pass
-- additional self-written tests
-- one benchmark
-- one short design note
-
-## Hidden-test themes
-- edge cases
-- long operation sequences
-- incorrect assumptions about ownership or ordering
-- complexity regressions
+- UniquePtr
+- SharedPtr
+- tests for lifetime behavior
+- short reflection on ownership
