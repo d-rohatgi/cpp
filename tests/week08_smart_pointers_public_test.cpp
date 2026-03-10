@@ -30,6 +30,13 @@ TEST(Week08UniquePtr, ReleaseReturnsRawPointerAndNullsOwner) {
     delete raw;
 }
 
+TEST(Week08UniquePtr, ResetCanPointToNewObject) {
+    course::UniquePtr<Counter> ptr;
+    ptr.reset(new Counter(9));
+    ASSERT_NE(ptr.get(), nullptr);
+    EXPECT_EQ(ptr->value, 9);
+}
+
 TEST(Week08SharedPtr, StartsWithUseCountOne) {
     course::SharedPtr<Counter> ptr(new Counter(11));
     EXPECT_EQ(ptr.use_count(), 1u);
@@ -42,4 +49,15 @@ TEST(Week08SharedPtr, CopyIncrementsUseCount) {
 
     EXPECT_EQ(a.use_count(), 2u);
     EXPECT_EQ(b.use_count(), 2u);
+}
+
+TEST(Week08SharedPtr, ResetCanDropOwnership) {
+    Counter::destructions = 0;
+    {
+        course::SharedPtr<Counter> ptr(new Counter(9));
+        ptr.reset();
+        EXPECT_EQ(ptr.get(), nullptr);
+        EXPECT_EQ(ptr.use_count(), 0u);
+    }
+    EXPECT_GE(Counter::destructions, 1);
 }

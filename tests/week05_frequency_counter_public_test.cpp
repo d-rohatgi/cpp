@@ -20,3 +20,13 @@ TEST(Week05FrequencyCounter, NormalizesCaseAndPunctuation) {
     EXPECT_EQ(result[0].first, "apple");
     EXPECT_EQ(result[0].second, 3);
 }
+
+TEST(Week05FrequencyCounter, EmptyInputReturnsEmptyResult) {
+    const auto result = course::count_words("");
+    EXPECT_TRUE(result.empty());
+}
+
+TEST(Week05FrequencyCounter, PunctuationOnlyInputReturnsEmptyResult) {
+    const auto result = course::count_words("!!! ???");
+    EXPECT_TRUE(result.empty());
+}

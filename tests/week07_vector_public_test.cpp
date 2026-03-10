@@ -38,6 +38,21 @@ TEST(Week07Vector, ReserveDoesNotChangeSize) {
     EXPECT_GE(v.capacity(), 32u);
 }
 
+TEST(Week07Vector, PopBackShrinksSize) {
+    course::Vector<int> v;
+    v.push_back(1);
+    v.push_back(2);
+    v.pop_back();
+    EXPECT_EQ(v.size(), 1u);
+    EXPECT_EQ(v[0], 1);
+}
+
+TEST(Week07Vector, AtThrowsOutOfRange) {
+    course::Vector<int> v;
+    v.push_back(1);
+    EXPECT_THROW(v.at(1), std::out_of_range);
+}
+
 TEST(Week07Vector, ClearDestroysElements) {
     {
         course::Vector<CountingValue> v;
@@ -47,4 +62,29 @@ TEST(Week07Vector, ClearDestroysElements) {
         EXPECT_EQ(v.size(), 0u);
     }
     EXPECT_EQ(CountingValue::live_count, 0);
+}
+
+TEST(Week07Vector, CopyCreatesIndependentContainer) {
+    course::Vector<std::string> a;
+    a.push_back("alpha");
+    a.push_back("beta");
+
+    course::Vector<std::string> b(a);
+    b[0] = "changed";
+
+    EXPECT_EQ(a[0], "alpha");
+    EXPECT_EQ(b[0], "changed");
+}
+
+TEST(Week07Vector, MoveLeavesSourceValid) {
+    course::Vector<std::string> a;
+    a.push_back("x");
+    a.push_back("y");
+
+    course::Vector<std::string> b(std::move(a));
+
+    EXPECT_EQ(b.size(), 2u);
+    EXPECT_EQ(b[0], "x");
+    EXPECT_EQ(b[1], "y");
+    EXPECT_TRUE(a.empty() || a.size() == 0u);
 }

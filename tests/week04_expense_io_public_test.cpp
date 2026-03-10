@@ -15,6 +15,11 @@ TEST(Week04ExpenseIO, RejectsMalformedLine) {
     EXPECT_FALSE(parsed.has_value());
 }
 
+TEST(Week04ExpenseIO, RejectsInvalidNumericAmount) {
+    auto parsed = course::parse_expense_line("food,abc");
+    EXPECT_FALSE(parsed.has_value());
+}
+
 TEST(Week04ExpenseIO, TotalsAmounts) {
     std::vector<course::Expense> expenses{
         {"food", 10.0},
@@ -22,4 +27,9 @@ TEST(Week04ExpenseIO, TotalsAmounts) {
         {"coffee", 5.5},
     };
     EXPECT_DOUBLE_EQ(course::total_amount(expenses), 115.5);
+}
+
+TEST(Week04ExpenseIO, EmptyExpenseListTotalsToZero) {
+    std::vector<course::Expense> expenses;
+    EXPECT_DOUBLE_EQ(course::total_amount(expenses), 0.0);
 }
