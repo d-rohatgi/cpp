@@ -8,6 +8,11 @@ TEST(Week03BankAccount, StoresOwnerAndBalance) {
     EXPECT_DOUBLE_EQ(account.balance(), 100.0);
 }
 
+TEST(Week03BankAccount, NegativeInitialBalanceClampsToZero) {
+    course::BankAccount account("Test", -50.0);
+    EXPECT_DOUBLE_EQ(account.balance(), 0.0);
+}
+
 TEST(Week03BankAccount, DepositIncreasesBalance) {
     course::BankAccount account("Test", 10.0);
     EXPECT_TRUE(account.deposit(15.0));
@@ -42,4 +47,18 @@ TEST(Week03BankAccount, WithdrawRejectsNegativeAmount) {
     course::BankAccount account("Test", 20.0);
     EXPECT_FALSE(account.withdraw(-2.0));
     EXPECT_DOUBLE_EQ(account.balance(), 20.0);
+}
+
+TEST(Week03BankAccount, WithdrawExactBalanceReachesZero) {
+    course::BankAccount account("Test", 20.0);
+    EXPECT_TRUE(account.withdraw(20.0));
+    EXPECT_DOUBLE_EQ(account.balance(), 0.0);
+}
+
+TEST(Week03BankAccount, SequenceOfOperationsMaintainsBalance) {
+    course::BankAccount account("Test", 10.0);
+    EXPECT_TRUE(account.deposit(5.0));
+    EXPECT_TRUE(account.withdraw(3.0));
+    EXPECT_FALSE(account.withdraw(100.0));
+    EXPECT_DOUBLE_EQ(account.balance(), 12.0);
 }

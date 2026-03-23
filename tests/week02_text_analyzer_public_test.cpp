@@ -28,7 +28,37 @@ TEST(Week02TextAnalyzer, CountsUppercaseVowels) {
     EXPECT_EQ(result.vowel_count, 5u);
 }
 
-TEST(Week02TextAnalyzer, LongestWordTracksSimplePunctuationScenario) {
-    const auto result = course::analyze_text("hi there");
-    EXPECT_EQ(result.longest_word, "there");
+TEST(Week02TextAnalyzer, LeadingAndTrailingSpacesDoNotCreateWords) {
+    const auto result = course::analyze_text("  hello world  ");
+    EXPECT_EQ(result.word_count, 2u);
+    EXPECT_EQ(result.longest_word, "hello");
+}
+
+TEST(Week02TextAnalyzer, AllSpacesProduceZeroWords) {
+    const auto result = course::analyze_text("     ");
+    EXPECT_EQ(result.character_count, 5u);
+    EXPECT_EQ(result.word_count, 0u);
+    EXPECT_EQ(result.vowel_count, 0u);
+    EXPECT_TRUE(result.longest_word.empty());
+}
+
+TEST(Week02TextAnalyzer, TieKeepsFirstLongestWord) {
+    const auto result = course::analyze_text("cat dog");
+    EXPECT_EQ(result.longest_word, "cat");
+}
+
+TEST(Week02TextAnalyzer, CountsCharactersIncludingSpaces) {
+    const auto result = course::analyze_text("a b");
+    EXPECT_EQ(result.character_count, 3u);
+}
+
+TEST(Week02TextAnalyzer, PunctuationRemainsPartOfWordUnderWhitespaceRule) {
+    const auto result = course::analyze_text("hi, there!");
+    EXPECT_EQ(result.word_count, 2u);
+    EXPECT_EQ(result.longest_word, "there!");
+}
+
+TEST(Week02TextAnalyzer, MixedCaseVowelsCountCorrectly) {
+    const auto result = course::analyze_text("AbCdEf");
+    EXPECT_EQ(result.vowel_count, 2u);
 }

@@ -40,3 +40,22 @@ TEST(Week06LinkedList, RepeatedClearIsSafe) {
     list.clear();
     EXPECT_EQ(list.size(), 0u);
 }
+
+TEST(Week06LinkedList, PushAfterClearWorks) {
+    course::LinkedList list;
+    list.push_front(1);
+    list.clear();
+    list.push_front(2);
+
+    EXPECT_EQ(list.size(), 1u);
+    EXPECT_TRUE(list.contains(2));
+    EXPECT_FALSE(list.contains(1));
+}
+
+TEST(Week06LinkedList, SizeTracksMultipleInsertions) {
+    course::LinkedList list;
+    list.push_front(1);
+    list.push_front(2);
+    list.push_front(3);
+    EXPECT_EQ(list.size(), 3u);
+}

@@ -34,3 +34,11 @@ TEST(Week01Calculator, SupportsNegativeInputs) {
 TEST(Week01Calculator, SupportsDecimalInputs) {
     EXPECT_DOUBLE_EQ(course::calculate(2.5, 4.0, '*'), 10.0);
 }
+
+TEST(Week01Calculator, ZeroNumeratorDivisionReturnsZero) {
+    EXPECT_DOUBLE_EQ(course::calculate(0.0, 5.0, '/'), 0.0);
+}
+
+TEST(Week01Calculator, DoubleNegativeSubtractionWorks) {
+    EXPECT_DOUBLE_EQ(course::calculate(-2.0, -3.0, '-'), 1.0);
+}
